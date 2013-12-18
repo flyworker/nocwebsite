@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block title %}Esgob Ltd - Looking glass - AS30746 AS60564{% endblock %}
+{% block body %}
+        <div class="page-header">
+            <h1>Looking glass</h1>
+        </div>
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="inputIP">IP address</label>
+    <div class="controls">
+      <input type="text" id="inputIP" placeholder="x.x.x.x">
+    </div>
+  </div>
+
+     <div class="control-group">
+   	<label class="radio">
+	<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"><span class="label label-info">AS30746</span>
+	<img src="static/images/flags/england.gif"> England, London
+	</label>
+   </div>
+{% for node in nodes %}
+   <div class="control-group">
+   	<label class="radio">
+	<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"><span class="label label-danger">AS60564</span>
+	<img src="static/images/flags/{{ node.flag }}.gif"> {{ node.locationdisplay }}
+	</label>
+   </div>
+  {% endfor %}
+
+
+  <div class="control-group">
+    <div class="controls">
+      <label class="checkbox">
+        <input type="checkbox"> Remember me
+      </label>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+
+  </div>
+</form>
+{% endblock %}
