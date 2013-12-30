@@ -17,7 +17,7 @@ app.config.from_object(__name__)
 @app.before_request
 def before_request():
     g.ac = ApiClient()
-    g.ac.InternalKey("")
+    g.ac.InternalKeyFromFile()
     g.ac.Endpoint("api.esgob.com", 80, False, "1.0")
 
 
@@ -32,9 +32,9 @@ def index():
         return render_template('index.html', nodes=nodes)
 
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
+@app.route('/peering')
+def peering():
+    return render_template('peering.html')
 
 
 @app.route('/availability')
