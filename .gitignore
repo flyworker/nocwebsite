@@ -1,2 +1,6 @@
 
 .esgobapi.key
+
+ApiClient.py
+
+*.pyc
