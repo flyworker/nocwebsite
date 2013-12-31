@@ -37,6 +37,11 @@ def peering():
     return render_template('peering.html')
 
 
+@app.route('/debug')
+def debug():
+    return render_template('debug.html')
+
+
 @app.route('/availability')
 def availability():
     return render_template('availability.html')
