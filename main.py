@@ -6,6 +6,7 @@ import os
 from flask import Flask, render_template, send_from_directory, flash, request, redirect, url_for, g, Response
 from flask.ext.cache import Cache
 from ApiClient import ApiClient
+from CommonConfig import CommonConfig
 
 app = Flask(__name__)
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
@@ -16,9 +17,8 @@ app.config.from_object(__name__)
 
 @app.before_request
 def before_request():
-    g.ac = ApiClient()
-    g.ac.InternalKeyFromFile()
-    g.ac.Endpoint("api.esgob.com", 80, False, "1.0")
+    g.cc = CommonConfig()
+    g.ac = ApiClient(commonconfig=g.cc)
 
 
 @cache.cached(timeout=300)
