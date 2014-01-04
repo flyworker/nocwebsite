@@ -26,7 +26,7 @@ def before_request():
 def index():
     resp = g.ac.Call("internal/anycastnodes.list")
     if resp.success is False:
-        return render_template('error_api.html'),501
+        return render_template('error_api.html'), 501
     else:
         nodes = resp.data["anycastnodes"]
         return render_template('index.html', nodes=nodes)
