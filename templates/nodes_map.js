@@ -3,7 +3,7 @@ $(document).ready(function(){
     el: '#nodes_map',
     lat: 40.0,
     lng: -10.0,
-    zoom: 3,
+    zoom: 2,
     zoomControl : true,
     panControl : false,
     mapTypeControl : false,
