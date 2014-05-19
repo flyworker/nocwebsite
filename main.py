@@ -51,6 +51,10 @@ def availability():
 def looking_glass():
     return render_template('looking_glass_soon.html')
 
+@app.route('/secondary_dns')
+def secondary_dns():
+    return render_template('secondary_dns.html')
+
 
 @app.route('/favicon.ico')
 def favicon():

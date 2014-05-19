@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}Esgob Ltd - Free secondary DNS{% endblock %}
+{% block body %}
+        <div class="page-header">
+            <h2>Secondary DNS</h2>
+        </div>
+	<h3>Summary</h3>
+	<div><p>Currently building an anycast DNS service spanning multiple countries and continents.</p></div>
+	<div><p>We are seeking participants to beta test our <b>free</b> secondary DNS service, we already host over a 1000 zones.</p></div>
+	<h3>Features</h3>
+	<ul>
+		<li>12 <a href="http://en.wikipedia.org/wiki/Anycast" target="_blank">Anycast</a> nodes deployed (and growing every month!)</li>
+		<li>Unlimited domains</li>
+		<li>IPv4 and IPv6</li>
+		<li>Supports NOTIFY</li>
+		<li><a href="http://en.wikipedia.org/wiki/Domain_Name_System_Security_Extensions" target="_blank">DNSSEC</a> compliant</li>
+		<li>AXFR over both v4 + v6</li>
+		<li>Hosting of both forward and reverse zones</li>
+		<li>Coming soon:</li>
+		<ul>
+			<li>REST API and web interface</li>
+			<li>TSIG inbound</li>
+			<li>Multi master</li>
+		</ul>
+	</ul>
+ 	<h3>Configuration</h3>
+	<p>Secondary DNS zones are served via anycast from (please add this to your NS record and delegate at your registrar):<br/>
+		<ul>
+			<li><b>ns1.esgob.com</b></li>
+			<li>193.47.147.100</li>
+			<li>2001:67c:1b43:100::100</li>
+		</ul>
+	</p>
+	<p>We operate a dedicated AXFR host, please allow AXFR zone transfers from:<br/>
+		<ul>
+			<li><b>axfr.esgob.com</b></li>
+			<li>195.177.253.142</li>
+			<li>2001:67c:1b40:142::142</li>
+		</ul>
+	We will honor notifies that are sent to the AXFR host.<br/>
+	</p>
+	<h3>Beta</h3>
+	<p>Our API and web interface are now being finished, but to participate please email <a href="mailto:noc@esgob.com">noc@esgob.com</a>, include a list of domains and your master IP.</p>
+
+{% endblock %}

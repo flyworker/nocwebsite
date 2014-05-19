@@ -7,43 +7,8 @@
 			<p><img src="static/images/website.png"/> <a href="http://www.esgob.com/">Main website</a></p>
 			<p><img src="static/images/email.png"/> <a href="mailto:noc@esgob.com">noc@esgob.com</a></p>
 		</div>
-	<p>&nbsp;</p>
 
-	<div class="panel panel-default">
-	  <div class="panel-heading">
-	    <h3 class="panel-title">AS30746</h3>
-	  </div>
-        <div class="panel-body">
-            <h5>Our management infrastructure, based in London Docklands</h5>
-            <h6>Advertising:<br/>&nbsp;</br>
-                <ul>
-                    <li><a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=AS-ESGOB">AS-ESGOB</a></li>
-                    <li><a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=195.177.252.0-195.177.253.255">195.177.253.0/23</a></li>
-                    <li>2001:067c:1b40::/48</li>
-                    <li>2001:067c:1b42::/48</li>
-                </ul>
-            </h6>
-            <p><a href="http://www.peeringdb.com/view.php?asn=30746">PeeringDB</a> <a href="http://bgp.he.net/AS30746"><img border=0 src="static/images/he.png"></a> <a href="http://bgp.he.net/AS30746">bgp.he.net</a></p>
-        </div>
-	</div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">AS60564</h3>
-      </div>
-        <div class="panel-body">
-            <h5>Delivering fast, resilient and distributed services</h5>
-            <h6>Advertising:<br/>&nbsp;</br>
-                <ul>
-                    <li><a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=AS-ESGOB-ANYCAST">AS-ESGOB-ANYCAST</a></li>
-                    <li><a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=193.47.147.0-193.47.147.255">193.47.147.0/24</a></li>
-                    <li>2001:067c:1b43::/48</li>
-                </ul>
-            </h6>
-            <p><a href="http://www.peeringdb.com/view.php?asn=60564">PeeringDB</a> <a href="http://bgp.he.net/AS60564"><img border=0 src="static/images/he.png"></a> <a href="http://bgp.he.net/AS60564">bgp.he.net</a></p>
-        </div>
-    </div>
-
+	<div class="alert alert-success"><b>Free Secondary DNS</b> - <a href="/secondary_dns">Click here to participate in our beta.</a></div>
 
         <h3>Anycast nodes</h3>
 <script type="text/javascript">
@@ -55,7 +20,7 @@
 {% include 'nodes_table.html' %}
 	<script>
 (function($) {
-var url = 'http://local.esgob.com/jsonCallback.json';
+var url = 'https://local.esgob.com/jsonCallback.json';
 
 $.ajax({
    type: 'GET',
@@ -75,4 +40,40 @@ $.ajax({
 
 })(jQuery);
 	</script>
+
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">AS30746</h3>
+	  </div>
+        <div class="panel-body">
+            <h5>Our management infrastructure, based in London Docklands</h5>
+            <h6>Advertising:<br/>&nbsp;</br>
+                <ul>
+                    <li><a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=AS-ESGOB">AS-ESGOB</a></li>
+                    <li><a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=195.177.252.0-195.177.253.255">195.177.253.0/23</a></li>
+                    <li>2001:067c:1b40::/48</li>
+                    <li>2001:067c:1b42::/48</li>
+                </ul>
+            </h6>
+            <p><a href="http://www.peeringdb.com/view.php?asn=30746">PeeringDB</a> <a href="http://bgp.he.net/AS30746"><img border=0 src="static/images/he.png"></a> <a href="http://bgp.he.net/AS30746">bgp.he.net</a></p>
+        </div>
+	</div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">AS60564</h3>
+      </div>
+        <div class="panel-body">
+            <h5>Delivering fast, resilient and distributed services</h5>
+            <h6>Advertising:<br/>&nbsp;</br>
+                <ul>
+                    <li><a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=AS-ESGOB-ANYCAST">AS-ESGOB-ANYCAST</a></li>
+                    <li><a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=193.47.147.0-193.47.147.255">193.47.147.0/24</a></li>
+                    <li>2001:067c:1b43::/48</li>
+                </ul>
+            </h6>
+            <p><a href="http://www.peeringdb.com/view.php?asn=60564">PeeringDB</a> <a href="http://bgp.he.net/AS60564"><img border=0 src="static/images/he.png"></a> <a href="http://bgp.he.net/AS60564">bgp.he.net</a></p>
+        </div>
+    </div>
+
+
 {% endblock %}
