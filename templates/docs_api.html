@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %}Esgob Ltd - Free secondary DNS{% endblock %}
+{% block body %}
+        <div class="page-header">
+            <h2>API Documentation</h2>
+        </div>
+	<h3>Summary</h3>
+	<div>
+		<p>Our API is accessible to anyone who has an account. It consists of a set of callable methods and some API endpoints.</p>
+		<p>It is REST based and capable of returning either JSON (by default) or XML.<p>
+	</div>
+	<h3>Resources</h3>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Resource</th>
+				<th>Authentication</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><a href="/docs/api/accounts.get">GET /1.0/accounts.get</a></td>
+				<td>Account</td>
+				<td>Return account status; credit balance, etc</td>
+			</tr>
+			<tr>
+				<td><a href="/docs/api/domains.list">GET /1.0/domains.list</a></td>
+				<td>Account</td>
+				<td>Returns all hosted domains</td>
+			</tr>
+			<tr>
+				<td><a href="/docs/api/domains.slaves.list">GET /1.0/domains.slaves.list</a></td>
+				<td>Account</td>
+				<td>Returns all hosted slave domains</td>
+			</tr>
+			<tr>
+				<td><a href="/docs/api/domains.slaves.add">GET /1.0/domains.slaves.add</a></td>
+				<td>Account</td>
+				<td>Adds a new slave domain</td>
+			</tr>
+			<tr>
+				<td><a href="/docs/api/domains.slaves.delete">GET /1.0/domains.slaves.delete</a></td>
+				<td>Account</td>
+				<td>Deletes a slave domain</td>
+			</tr>
+			<tr>
+				<td><a href="/docs/api/domains.slaves.updatemasterip">GET /1.0/domains.slaves.updatemasterip</a></td>
+				<td>Account</td>
+				<td>Updates the master IP of a slave domain</td>
+			</tr>
+		</tbody>
+	</table>
+	<h3>Feedback</h3>
+	<div>
+		<p>If you have any issues, comments or suggestions please email <a href="mailto:noc@esgob.com">noc@esgob.com<a>.</p>
+	</div>
+
+{% endblock %}

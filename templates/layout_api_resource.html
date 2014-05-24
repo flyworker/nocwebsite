@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block title %}Esgob Ltd - API {{ self.resourceurl() }}{% endblock %}
+{% block body %}
+        <div class="page-header">
+            <h2>GET {{ self.resourceurl() }}</h2>
+        </div>
+	<p><a href="/docs/api">Back to API documentation</a></p>
+	<h3>Overview</h3>
+	<div>
+		<p>{% block overview %}{% endblock %}</p>
+	</div>
+	<h3>Resource URL</h3>
+	<div>
+		<p>https://api.esgob.com{{ self.resourceurl() }}</p>
+	<h3>Parameters</h3>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Parameter</th>
+				<th> </th>
+				<th>Description</th>
+				<th>Example value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>account</td>
+				<td><i>Required</i></td>
+				<td>Account name</td>
+				<td>joebloggs</td>
+			</tr>
+			<tr>
+				<td>key</td>
+				<td><i>Required</i></td>
+				<td>API Key</td>
+				<td>581e8f022fcd438286571044cd6aa51b</td>
+			</tr>
+			<tr>
+				<td>f</td>
+				<td><i>Optional</i></td>
+				<td>Format: json or xml, default is json</td>
+				<td>xml</td>
+			</tr>
+{% block paramstable %}
+{% endblock %}
+		</tbody>
+	</table>
+	<h3>Example request</h3>
+	<p><b>GET</b> <code>https://api.esgob.com{{ self.resourceurl() }}?{{ self.exampleqry() }}</code></p>
+	<pre>{{ self.examplejson() }}</pre>
+
+{% endblock %}

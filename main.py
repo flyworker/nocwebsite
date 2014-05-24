@@ -56,6 +56,15 @@ def secondary_dns():
     return render_template('secondary_dns.html')
 
 
+@app.route('/docs/api')
+def docs_api():
+    return render_template('docs_api.html')
+
+
+@app.route('/docs/api/<resource>')
+def docs_api_resource(resource):
+    return render_template("docs_api/%s.html" % (resource))
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/images/'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
