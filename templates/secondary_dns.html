@@ -32,15 +32,40 @@
 			<li>2001:67c:1b43:100::100</li>
 		</ul>
 	</p>
-	<p>We operate a dedicated AXFR host, please allow AXFR zone transfers from:<br/>
+	<h4>Zone transfers to us (AXFRs)</h4>
+	<p>We operate a dedicated AXFR host, this distributes zone updates to our anycast nodes. You must allow zone transfers from:<br/>
 		<ul>
 			<li><b>axfr.esgob.com</b></li>
 			<li>195.177.253.142</li>
 			<li>2001:67c:1b40:142::142</li>
 		</ul>
-	We will honor notifies that are sent to the AXFR host.<br/>
-	</p>
-	<h3>Beta</h3>
-	<p>To participate please email <a href="mailto:noc@esgob.com">noc@esgob.com</a>.</p>
+	<p>We will honor notifies that are sent to the AXFR host.<p>
+	<h4>Sample BIND configuration</h4>
+	<p>Example:</p>
+	<pre>
+zone "natmorris.co.uk" {
+        type master;
+        file "/etc/bind/master/db.natmorris.co.uk";
+        allow-transfer { 195.177.253.142; };
+        also-notify { 195.177.253.142; };
+};
+</pre>
+	<h4>Adding a zone</h4>
+	<p>Adding zones is easy via our <a href="/docs/api">documented REST API</a>, once we have created you an account and issued a key.<p>
+	<pre>
+$ curl https://api.esgob.com/1.0/domains.slaves.add?account=joebloggs&key=xxx&domain=natmorris.co.uk&masterip=192.0.2.1
+{
+    "action": "domain added"
+}</pre>
+	<h3>Vanity name servers</h3>
+	<p>Many users create their own DNS record for our service, you can do this to rebrand it.</p>
+	<p>Create both A + AAAA records in your own zone, example.com:</p>
+	<pre>
+anycastns		A	193.47.147.100
+			AAAA	2001:67c:1b43:100::100
+</pre>
+	<p>Then specify anycastns.example.com instead of ns1.esgob.com in the delegation.<p>
+	<h3>Join in - beta</h3>
+	<p>To participate please email <a href="mailto:noc@esgob.com">noc@esgob.com</a> and we will create you an account.</p>
 
 {% endblock %}
