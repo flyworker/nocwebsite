@@ -1,6 +1,6 @@
 {% extends "layout_api_resource.html" %}
-{% block resourceurl %}/1.0/domains.slaves.add{% endblock %}
-{% block overview %}Adds a new slave domain.{% endblock %}
+{% block resourceurl %}/1.0/domains.slaves.updatemasterip{% endblock %}
+{% block overview %}Update the master IP of an existing slave domain.{% endblock %}
 {% block paramstable %}
                         <tr>
                                 <td>domain</td>
@@ -12,12 +12,12 @@
                                 <td>masterip</td>
                                 <td><i>Required</i></td>
                                 <td>IP address of master server</td>
-                                <td>192.0.2.1 or 2001:0db8:aaaa::1</td>
+                                <td>192.0.2.2 or 2001:0db8:aaaa::2</td>
                         </tr>
 {% endblock %}
-{% block exampleqry %}account=joebloggs&key=xxx&domain=abcdef.com&masterip=192.0.2.1{% endblock %}
+{% block exampleqry %}account=joebloggs&key=xxx&domain=abcdef.com&masterip=192.0.2.2{% endblock %}
 {% block examplejson %}
 {
-    "action": "domain added"
+    "action": "domain master IP updated"
 }
 {% endblock %}

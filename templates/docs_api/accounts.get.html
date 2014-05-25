@@ -1,0 +1,13 @@
+{% extends "layout_api_resource.html" %}
+{% block resourceurl %}/1.0/accounts.get{% endblock %}
+{% block overview %}Return account status; credit balance, etc{% endblock %}
+{% block paramstable %}{% endblock %}
+{% block exampleqry %}account=joebloggs&key=xxx{% endblock %}
+{% block examplejson %}
+{
+    "credits": 200,
+    "users": [],
+    "id": "joebloggs",
+    "name": "Joe Bloggs Networks"
+}
+{% endblock %}

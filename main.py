@@ -63,7 +63,11 @@ def docs_api():
 
 @app.route('/docs/api/<resource>')
 def docs_api_resource(resource):
-    return render_template("docs_api/%s.html" % (resource))
+    resource = resource.lower()
+    try:
+        return render_template("docs_api/%s.html" % (resource))
+    except:
+        return render_template('error_404.html'), 404
 
 @app.route('/favicon.ico')
 def favicon():

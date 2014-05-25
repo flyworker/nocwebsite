@@ -1,0 +1,17 @@
+{% extends "layout_api_resource.html" %}
+{% block resourceurl %}/1.0/domains.slaves.delete{% endblock %}
+{% block overview %}Delete an existing slave domain.{% endblock %}
+{% block paramstable %}
+                        <tr>
+                                <td>domain</td>
+                                <td><i>Required</i></td>
+                                <td>Domain name</td>
+                                <td>abcdef.com</td>
+                        </tr>
+{% endblock %}
+{% block exampleqry %}account=joebloggs&key=xxx&domain=abcdef.com{% endblock %}
+{% block examplejson %}
+{
+    "action": "domain deleted"
+}
+{% endblock %}
