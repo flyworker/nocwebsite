@@ -1,0 +1,23 @@
+{% extends "layout_api_resource.html" %}
+{% block resourceurl %}/1.0/domains.slaves.axfrout.add{% endblock %}
+{% block overview %}Allow a host to AXFR zone transfers out from Esgob for an existing slave domain.{% endblock %}
+{% block paramstable %}
+                        <tr>
+                                <td>domain</td>
+                                <td><i>Required</i></td>
+                                <td>Domain name</td>
+                                <td>abcdef.com</td>
+                        </tr>
+                        <tr>
+                                <td>axfrip</td>
+                                <td><i>Required</i></td>
+                                <td>IP address of AXFR server</td>
+                                <td>192.0.2.2 or 2001:0db8:aaaa::2</td>
+                        </tr>
+{% endblock %}
+{% block exampleqry %}account=joebloggs&key=xxx&domain=abcdef.com&axfrip=192.0.2.2{% endblock %}
+{% block examplejson %}
+{
+    "action": "domain AXFR out IPs updated"
+}
+{% endblock %}
