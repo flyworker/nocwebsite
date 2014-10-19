@@ -9,8 +9,8 @@ from ApiClient import ApiClient
 from CommonConfig import CommonConfig
 
 app = Flask(__name__)
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 app.config.from_object(__name__)
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 # noc website
 
@@ -21,8 +21,8 @@ def before_request():
     g.ac = ApiClient(commonconfig=g.cc)
 
 
-@cache.cached(timeout=300)
 @app.route('/')
+@cache.cached(timeout=30)
 def index():
     resp = g.ac.Call("internal/anycastnodes.list")
     if resp.success is False:
@@ -43,6 +43,7 @@ def debug():
 
 
 @app.route('/availability')
+@cache.cached(timeout=30)
 def availability():
     return render_template('availability.html')
 
@@ -52,16 +53,19 @@ def looking_glass():
     return render_template('looking_glass_soon.html')
 
 @app.route('/secondary_dns')
+@cache.cached(timeout=30)
 def secondary_dns():
     return render_template('secondary_dns.html')
 
 
 @app.route('/docs/api')
+@cache.cached(timeout=30)
 def docs_api():
     return render_template('docs_api.html')
 
 
 @app.route('/docs/api/<resource>')
+@cache.cached(timeout=30)
 def docs_api_resource(resource):
     resource = resource.lower()
     try:
