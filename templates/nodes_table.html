@@ -7,6 +7,7 @@
             <th>State</th>
             <th>Protocols</th>
             <th>In service</th>
+            <th>Notes</th>
           </tr>
         </thead>
         <tbody>
@@ -15,9 +16,10 @@
             <td>{{ loop.index }}</td>
             <td><img src="static/images/flags/{{ node.flag }}.gif"/></td>
             <td>{{ node.locationdisplay }}</td>
-            <td>{% if node.state == "maintenance" %}<span class="label label-info">Maintenance</span>{% endif %}{% if node.state == "live" %}<span class="label label-success">Live</span>{% endif %}{% if node.state == "inprogress" %}<span class="label label-primary">In Progress</span>{% endif %}<span id="node-highlight-{{ node.ref }}"></span></td>
+            <td>{% if node.state == "maintenance" %}<span class="label label-warning">Maintenance</span>{% endif %}{% if node.state == "live" %}<span class="label label-success">Live</span>{% endif %}{% if node.state == "inprogress" %}<span class="label label-primary">In Progress</span>{% endif %}<span id="node-highlight-{{ node.ref }}"></span></td>
             <td>{% if node.v4display %}<span class="label label-info">IPv4</span>{% endif %} {% if node.v6display %}<span class="label label-warning">IPv6</span>{% endif %}</td>
             <td>{{ node.livedisplay }}</td>
+            <td>{{ node.publicnote }}</td>
           </tr>
           {% endfor %}
       </table>

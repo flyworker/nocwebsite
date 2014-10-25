@@ -21,6 +21,13 @@ def before_request():
     g.ac = ApiClient(commonconfig=g.cc)
 
 
+def getnodesstate(nodes,state):
+    matching = []
+    for node in nodes:
+        if node["state"] == state:
+            matching.append(node)
+    return matching
+
 @app.route('/')
 @cache.cached(timeout=30)
 def index():
@@ -28,7 +35,13 @@ def index():
     if resp.success is False:
         return render_template('error_api.html'), 501
     else:
-        nodes = resp.data["anycastnodes"]
+        nodesall = resp.data["anycastnodes"]
+
+	nodes = []
+        nodes.extend(getnodesstate(nodesall,"maintenance"))
+        nodes.extend(getnodesstate(nodesall,"live"))
+        nodes.extend(getnodesstate(nodesall,"inprogress"))
+
         return render_template('index.html', nodes=nodes)
 
 
