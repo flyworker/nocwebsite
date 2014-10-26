@@ -77,6 +77,11 @@ def docs_api():
     return render_template('docs_api.html')
 
 
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+
 @app.route('/docs/api/<resource>')
 @cache.cached(timeout=30)
 def docs_api_resource(resource):

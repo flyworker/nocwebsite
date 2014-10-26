@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block title %}Register for free anycast secondary DNS{% endblock %}
+{% block body %}
+<p>&nbsp;</p>
+<div class="container">
+
+<!-- from http://bootsnipp.com/snippets/featured/mix-amp-match-register -->
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+        <form role="form" class="registerForm">
+            <h2>Please register <small>Free Anycast Secondary DNS.</small></h2>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" name="account_name" id="display_name" class="form-control input-lg" placeholder="Account Name" tabindex="3">
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+            </div>
+            
+            <hr class="colorgraph">
+            <div class="row">   
+                <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('.registerForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            account_name: {
+                message: 'The account name is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'Account name is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 4,
+                        max: 30,
+                        message: 'Account name must be more than 4 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9]+$/,
+                        message: 'Account name can only consist of alphabetical and number'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email is required and cannot be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}
