@@ -1,0 +1,136 @@
+{% extends "layout_api_resource.html" %}
+{% block resourceurl %}/1.0/domains.tools.soacheck{% endblock %}
+{% block overview %}Retrieve the SOA serial number from the master server, our AXFR transfer host, plus each anycast instance.{% endblock %}
+{% block paramstable %}
+                        <tr>
+                                <td>domain</td>
+                                <td><i>Required</i></td>
+                                <td>Domain name</td>
+                                <td>abcdef.com</td>
+                        </tr>
+{% endblock %}
+{% block exampleqry %}account=joebloggs&key=xxx&domain=abcdef.com{% endblock %}
+{% block examplejson %}
+{
+    "domain": "abcdef.com", 
+    "cached": false, 
+    "cachefor": 60,
+    "timestamp": 1414532088, 
+    "analysis": {
+        "mastersok": true, 
+        "consistent": true, 
+        "earliest": 2014041901, 
+        "nodesok": true, 
+        "latest": 2014041901
+    }, 
+    "responses": {
+        "masters": [
+            {
+                "soa": 2014041901, 
+                "ip": "195.177.253.166", 
+                "response": "ok"
+            }
+        ], 
+        "anycastnodes": [
+            {
+                "soa": 2014041901, 
+                "country": "gb", 
+                "ref": "pw77xk42", 
+                "location": "England, Hemel Hempstead", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "gb", 
+                "ref": "b0r2k2c4", 
+                "location": "England, London, A", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "gb", 
+                "ref": "ql7f823b", 
+                "location": "England, London, B", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "gb", 
+                "ref": "eohuoy6h", 
+                "location": "England, London, C", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "gb", 
+                "ref": "a645b1b8", 
+                "location": "England, Studley", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "de", 
+                "ref": "zeij3q25", 
+                "location": "Germany, Bremen", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "in", 
+                "ref": "oynsryd5", 
+                "location": "India, Pune", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "gb", 
+                "ref": "4f31ad80", 
+                "location": "Northern Ireland, Belfast", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "is", 
+                "ref": "2be59c70", 
+                "location": "Reykjavik, Iceland", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "gb", 
+                "ref": "oeo8uewk", 
+                "location": "Scotland, Edinburgh", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "us", 
+                "ref": "h1m9maf8", 
+                "location": "United States, Boston", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "us", 
+                "ref": "fgej72a1", 
+                "location": "United States, Detroit", 
+                "response": "ok"
+            }, 
+            {
+                "soa": 2014041901, 
+                "country": "us", 
+                "ref": "ibqew1am", 
+                "location": "United States, San Francisco", 
+                "response": "ok"
+            }
+        ], 
+        "axfrnodes": [
+            {
+                "soa": 2014041901, 
+                "ref": "1cd05e5d", 
+                "response": "ok"
+            }
+        ]
+    }
+}
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends "layout_api_resource.html" %}
 {% block resourceurl %}/1.0/domains.slaves.forcetransfer{% endblock %}
-{% block overview %}Force AXFR / transfer from master of a slave domain.{% endblock %}
+{% block overview %}Force AXFR / transfer from master of a slave domain. Note: You should not need to call this method after adding a domain, if you do then this is a sign that NOTIFY message are not being sent to the Esgob AXFR host correctly from your master.{% endblock %}
 {% block paramstable %}
                         <tr>
                                 <td>domain</td>
