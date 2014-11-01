@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Esgob Ltd - NOC Network Operations - AS30746 AS60564</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="/static/css/bootstrapValidator.min.css ">
+        <script src="/static/js/jquery-1.10.2.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <script src="/static/js/bootstrapValidator.min.js"></script>
+     <!-- Bootstrap -->
+ 
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+
+   <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    </head>
+    <body>
+
+    <div class="container">
+
+
+<p>&nbsp;</p>
+
+
+<form class="registerForm">
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username" />
+    </div>
+
+    <div class="form-group">
+        <label>Email address</label>
+        <input type="text" class="form-control" name="email" />
+    </div>
+</form>
+
+</div>
+
+<!-- from http://bootsnipp.com/snippets/featured/mix-amp-match-register -->
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+    $('.registerForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The username can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email is required and cannot be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            }
+        }
+    });
+});
+
+
+</script>
+
+</body>
+</html>

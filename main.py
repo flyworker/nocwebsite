@@ -38,16 +38,32 @@ def index():
         nodesall = resp.data["anycastnodes"]
 
 	nodes = []
-        nodes.extend(getnodesstate(nodesall,"maintenance"))
-        nodes.extend(getnodesstate(nodesall,"live"))
-        nodes.extend(getnodesstate(nodesall,"inprogress"))
+    nodes.extend(getnodesstate(nodesall,"maintenance"))
+    nodes.extend(getnodesstate(nodesall,"live"))
+    nodes.extend(getnodesstate(nodesall,"inprogress"))
 
-        return render_template('index.html', nodes=nodes)
+    return render_template('index.html', nodes=nodes)
 
 
 @app.route('/peering')
 def peering():
     return render_template('peering.html')
+
+
+@app.route('/status/anycast_instances')
+def status_anycast_instances():
+    resp = g.ac.Call("internal/anycastnodes.list")
+    if resp.success is False:
+        return render_template('error_api.html'), 501
+    else:
+        nodesall = resp.data["anycastnodes"]
+
+	nodes = []
+    nodes.extend(getnodesstate(nodesall,"maintenance"))
+    nodes.extend(getnodesstate(nodesall,"live"))
+    nodes.extend(getnodesstate(nodesall,"inprogress"))
+
+    return render_template('status_anycast_instances.html', nodes=nodes)
 
 
 @app.route('/debug')
