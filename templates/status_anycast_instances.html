@@ -22,9 +22,18 @@
             <th>Worker heatbeat</th>
             <th>BGP v4</th>
             <th>BGP v6</th>
+            <th>Anchor v6 /48</th>
           </tr>
         </thead>
         <tbody>
+
+{% macro anchorv6route(prefixhealth, neighbors6) %}
+{% if neighbors6 is not none %}
+{% if neighbors6.total > 0 %}
+<span class="glyphicon glyphicon-{% if prefixhealth.routesseen == true %}ok text-success{% else %}remove text-danger{% endif %}"></span> {% if prefixhealth.routesseen == true %}<small> In RIPEstat</small>{% endif %}
+{% endif %}
+{% endif %}
+{% endmacro %}
 
 {% macro neighbors(version, neighbors) %}
 {% if neighbors is none %}
@@ -53,6 +62,7 @@
             {% endif %}
             <td>{{ neighbors(4, node.status.bgp.neighbors4) }}</td>
             <td>{{ neighbors(6, node.status.bgp.neighbors6) }}</td>
+            <td>{{ anchorv6route(node.status.bgp.prefixhealth, node.status.bgp.neighbors6) }}</td>
           </tr>
 {% endfor %}
 </table>
