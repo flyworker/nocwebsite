@@ -6,6 +6,11 @@
         </div>
 
 <p>More stats to be added in the next few weeks...</p>
+<p><b>Notes:</b><p>
+<ul>
+    <li>Page cached for 10 seconds</li>
+    <li>1 IPv4 BGP session is used for internal management over a VPN tunnel.</li>
+</ul>
 
 <table class="table table-striped table-condensed">
         <thead>
@@ -21,19 +26,34 @@
         </thead>
         <tbody>
 
+{% macro neighbors(version, neighbors) %}
+{% if neighbors is none %}
+
+{% else %}
+{% if neighbors.total > 0 %}
+{% if neighbors.up == neighbors.total %}
+<span class="text-success">{{ neighbors.up }} up</span>
+{% else %}
+<span class="text-success">{{ neighbors.up }} up</span> / <span class="text-danger">{{ neighbors.total - neighbors.up }} down</span>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endmacro %}
+
 {% for node in nodes %}            
           <tr id="node-row-eeedd3pp">
             <td>{{ loop.index }}</td>
             <td><img src="/static/images/flags/{{ node.flag }}.gif" alt="{{ node.flag }} flag"/></td>
             <td>{{ node.locationdisplay }}</td>
             <td>{% if node.state == "maintenance" %}<span class="label label-warning">Maintenance</span>{% endif %}{% if node.state == "live" %}<span class="label label-success">Live</span>{% endif %}{% if node.state == "inprogress" %}<span class="label label-primary">In Progress</span>{% endif %}<span id="node-highlight-{{ node.ref }}"></span></td>
-            <td><span class="label label-success">v0.11</span> 3 seconds</td>
-            <td><span class="label label-success">1 / 2 up</span></td>
-            <td><span class="label label-success">1 / 2 up</span></td>
+            {% if node.status.worker is not none %}
+            <td><span class="label label-success">v{{ node.status.worker.version }}</span> <small>{{ node.status.worker.heartbeat.agodesc }}</small></td>
+            {% else %}
+            <td><span class="label label-danger">None</span></td>
+            {% endif %}
+            <td>{{ neighbors(4, node.status.bgp.neighbors4) }}</td>
+            <td>{{ neighbors(6, node.status.bgp.neighbors6) }}</td>
           </tr>
 {% endfor %}
 </table>
-
-
-
 {% endblock %}

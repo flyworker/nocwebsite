@@ -51,6 +51,7 @@ def peering():
 
 
 @app.route('/status/anycast_instances')
+@cache.cached(timeout=10)
 def status_anycast_instances():
     resp = g.ac.Call("internal/anycastnodes.list")
     if resp.success is False:
