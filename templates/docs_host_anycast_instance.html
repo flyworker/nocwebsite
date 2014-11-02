@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block title %}Esgob Ltd - Free secondary DNS{% endblock %}
+{% block body %}
+        <div class="page-header">
+            <h2>Host an anycast instance</h2>
+        </div>
+	<h3>Maybe you can host an anycast instance?</h3>
+	<div><p>We operate a large scale resilient free DNS hosting platform, we are looking for friendly network operators who can host an anycast instance for us around the world. We already have 20 nodes in various stages of deployment, expanding every month on month.</p></div>
+	<p>&nbsp;</p>
+	
+	<h3>In return</h3>
+	<p>In exchange for hosting an anycast instance for us, we can offer dedicated IPv4 + IPv6 addresses with in our anycast /24 + /48 prefixes, along with custom reverse DNS. Plus API access to host as many domains are you please.</p>
+	<p>&nbsp;</p>
+
+	<h3>BGP requirements</h3>
+	<p>All our anycast instances operate from AS60564, to announce our prefixes we need a BGP session with your POP router / layer 3 switch. At each location we announce a /24 along with two /48s (one of the /48s is a unique anchor prefix).<p>
+	<p>We do not require you to announce any routes to us, as the instance will have its default gateway set to your router (or VRRP/HSRP address).</p>
+	<p>Our routing information is kept upto date in the RIPE database: <a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=AS60564&type=aut-num">AS60564</a>, <a href="https://apps.db.ripe.net/search/lookup.html?source=ripe&key=AS-ESGOB-ANYCAST&type=as-set">AS-ESGOB-ANYCAST</a>. We are also happy to send you an LOA that can be forwarded to your upstreams if required.</p>
+	<p>Notes:</p>
+	<ul>
+		<li>IPv6 is optional.</li>
+		<li>At this current time we don't support eBGP multihop.</li>
+	</ul>
+	<p>&nbsp;</p>
+	<h3>Options</h3>
+	<p>Depending on your POP / datacentre location it might be possible to provision us a VM or easier for us to send you a small device to host in your rack.</p>
+	<p>&nbsp;</p>
+	
+	<h4>Virtual machine</h4>
+	<p>The quickest way to provision an instance is on a VM/VPS.</p>
+	<p>Single core, 1gb RAM, 20gb HDD is ample spec to get started, but may need to be increased based on traffic at that location. You just need to provide us with a Debian Wheezy amd64 minimal install.<p>
+	<p>Our preference is for the VM to be hosted on KVM, XEN or VMware - we have had problems on container based virtualization platforms such as LXC and OpenVZ in the past.</p>
+	<p>&nbsp;</p>
+	<p><img src="/static/images/logo_vm_kvm.png" height="32">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/images/logo_vm_xen.png" height="32">&nbsp;&nbsp;<img src="/static/images/logo_vm_vmware.png" height="32"> </p>
+	<p>&nbsp;</p>
+	
+	<h4>Hardware</h4>
+	<p>For locations where a VM is not possible, we can send you hardware for free. Our current device of choice is a <a href="http://www.gigabyte.com/products/list.aspx?s=47&ck=104">Gigabyte BRIX</a>, these are small Intel based 64bit units normally configured with a Quad core CPU, 4gb RAM and a 30gb mSATA. The onboard NIC is GigE capable, but can fall back to 100mbit if your data centre switch has no free GigE ports.</p>
+	<p>Power wise they come with an external PSU, with a C5/Cloverleaf connector, but we always ship them with an additional IEC C14 to C5/Cloverleaf cable - so they can easily connected to an existing in-rack PDU.</p>
+	<p><img src="/static/images/brix-rack.jpg" height="200"> <img src="/static/images/brix-hand.jpg" height="200"></p>
+	<p>Hardware spec:</p>
+	<ul>
+		<li>Dimensions: 29.9 mm x 107.9 mm x 114.6 mm (1.18" x 4.24" x 4.5")</li>
+		<li>Power usage: 17 watts @ 230v</li>
+		<li>Ethernet: 10/100/1000</li>
+	</ul>
+	<p>The BRIX will be delivered pre-install and configured, you will just need to connect it to your switch.</p>
+	<p>&nbsp;</p>
+
+	<h3>Get in touch</h3>
+	<p>Please email <a href="mailto:noc@esgob.com">noc@esgob.com</a>.</p>
+
+{% endblock %}

@@ -94,6 +94,12 @@ def docs_api():
     return render_template('docs_api.html')
 
 
+@app.route('/docs/docs_host_anycast_instance')
+#@cache.cached(timeout=30)
+def docs_host_anycast_instance():
+    return render_template('docs_host_anycast_instance.html')
+
+
 @app.route('/register')
 def register():
     return render_template('register.html')
