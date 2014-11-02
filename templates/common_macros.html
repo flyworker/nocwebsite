@@ -1,0 +1,14 @@
+{% macro navlink(endpoint,text, icon='') %}
+{% if icon %}
+  {% set icon='<i class="' ~ icon ~ '"></i>' %}
+{% endif %}
+{%- if request.endpoint == None %}
+<li><a href='{{url_for(endpoint)}}'>{{icon|safe}}{{text}}</a></li>
+{%- else %}
+{%- if request.endpoint.endswith(endpoint) == True %}
+<li class='active'><a href='#'>{{icon|safe}}{{text}}</a></li>
+{%- else %}
+<li><a href='{{url_for(endpoint)}}'>{{icon|safe}}{{text}}</a></li>
+{%- endif %}
+{%- endif %}
+{% endmacro %}
