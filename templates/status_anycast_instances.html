@@ -32,9 +32,9 @@
 {% else %}
 {% if neighbors.total > 0 %}
 {% if neighbors.up == neighbors.total %}
-<span class="text-success">{{ neighbors.up }} up</span>
+<span class="text-success">{{ neighbors.up }} <span class="glyphicon glyphicon-chevron-up"></span></span>
 {% else %}
-<span class="text-success">{{ neighbors.up }} up</span> / <span class="text-danger">{{ neighbors.total - neighbors.up }} down</span>
+<span class="text-success">{{ neighbors.up }} <span class="glyphicon glyphicon-chevron-up"></span> &nbsp; <span class="text-danger">{{ neighbors.total - neighbors.up }} <span class="glyphicon glyphicon-chevron-down"></span>
 {% endif %}
 {% endif %}
 {% endif %}
