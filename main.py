@@ -77,7 +77,6 @@ def debug():
 def availability():
     return render_template('availability.html')
 
-
 @app.route('/looking_glass')
 def looking_glass():
     return render_template('looking_glass_soon.html')
@@ -104,6 +103,9 @@ def docs_host_anycast_instance():
 def register():
     return render_template('register.html')
 
+@app.route('/register2')
+def register2():
+    return render_template('register2.html')
 
 @app.route('/docs/api/<resource>')
 @cache.cached(timeout=30)
@@ -113,6 +115,7 @@ def docs_api_resource(resource):
         return render_template("docs_api/%s.html" % (resource))
     except:
         return render_template('error_404.html'), 404
+
 
 @app.route('/favicon.ico')
 def favicon():
