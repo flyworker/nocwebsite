@@ -106,15 +106,17 @@ def register():
 
 @app.route('/register/ajax/validate', methods=['POST'])
 def register_ajax_validate():
-    val = None
     if "account" in request.form:
-        val = request.form["account"]
+        field = "account"
     elif "email" in request.form:
-        val = request.form["email"]
+        field = "email"
     else:
         return jsonify(valid=False)
-
-    return jsonify(valid=True)
+    value = request.form[field]
+    resp = g.ac.Call("internal/registration.validate.field?field=%s&val=%s" % (field, value))
+    if resp.success is False:
+        return jsonify(valid=False)
+    return jsonify(valid=bool(resp.data["valid"]))
 
 
 @app.route('/register/ajax/process', methods=['POST'])
@@ -124,10 +126,17 @@ def register_ajax_process():
     reg = request.json["registration"]
     if "account" not in reg or "email" not in reg or "name" not in reg:
         return jsonify(success=False)
-    account = reg["account"].strip().lower()
-    email = reg["email"].strip().lower()
-    name = reg["name"].strip()
-    return jsonify(success=True)
+    registration = {
+        "account": reg["account"].strip().lower(),
+        "email": reg["email"].strip().lower(),
+        "name": reg["name"].strip(),
+        "ip": request.remote_addr,
+        "browser": request.user_agent.string
+    }
+    resp = g.ac.Post("internal/registration.signup",registration)
+    if resp.success is False:
+        return jsonify(success=False)
+    return jsonify(success=bool(resp.data["success"]))
 
 
 @app.route('/docs/api/<resource>')

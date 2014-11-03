@@ -67,7 +67,7 @@ $(document).ready(function() {
         return Math.floor(Math.random() * (max - min + 1) + min);
     };
     $('#captchaOperation').html([randomNumber(1, 75), '+', randomNumber(1, 75), '='].join(' '));
-
+    $("input:text:visible:first").focus();
     $('#defaultForm').bootstrapValidator({
 //        live: 'disabled',
         message: 'This value is not valid',
@@ -113,7 +113,7 @@ $(document).ready(function() {
                         type: 'POST',
                         url: '/register/ajax/validate',
                         message: 'The username is not available',
-                        delay: 500
+                        delay: 1000
                     }
                 }
             },
@@ -129,7 +129,7 @@ $(document).ready(function() {
                         type: 'POST',
                         url: '/register/ajax/validate',
                         message: 'This email address is already registered',
-                        delay: 500
+                        delay: 1000
                     }
                 }
             },
