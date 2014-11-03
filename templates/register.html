@@ -4,51 +4,59 @@
 
 <div class="container">
         <div class="row">
-            <!-- form: -->
-            <section>
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="page-header">
-                        <h2>Please register <small>For free Anycast DNS</small></h2>
+            <!-- reg form -->
+            <div id="regForm">
+                <section>
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="page-header">
+                            <h2>Please register <small>For free anycast DNS</small></h2>
+                        </div>
+
+                        <form id="defaultForm" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Name</label>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" name="name" placeholder="Your name" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Account name</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="account" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Email address</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="email" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label" id="captchaOperation"></label>
+                                <div class="col-lg-2">
+                                    <input type="text" class="form-control" name="captcha" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-9 col-lg-offset-3">
+                                    <button type="submit" class="btn btn-primary" name="register" value="Register">Register</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-
-                    <form id="defaultForm" class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Name</label>
-                            <div class="col-lg-4">
-                                <input type="text" class="form-control" name="name" placeholder="Your name" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Account name</label>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" name="account" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Email address</label>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" name="email" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label" id="captchaOperation"></label>
-                            <div class="col-lg-2">
-                                <input type="text" class="form-control" name="captcha" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-lg-9 col-lg-offset-3">
-                                <button type="submit" class="btn btn-primary" name="register" value="Register">Register</button>
-                            </div>
-                        </div>
-                    </form>
+                </section>
+            </div>
+            <!-- reg form -->
+            <div id="regSuccess" style="display: none">
+                <div class="page-header">
+                    <h2>Thanks!</h2>
+                    <p>Your details are being processed, we will shortly send you login details.</p>
                 </div>
-            </section>
-            <!-- :form -->
+            </div>
         </div>
     </div>
 
@@ -74,6 +82,11 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'The first name is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 3,
+                        max: 64,
+                        message: 'Must be between 3 and 64 characters'
                     }
                 }
             },
@@ -84,9 +97,9 @@ $(document).ready(function() {
                         message: 'The account is required and cannot be empty'
                     },
                     stringLength: {
-                        min: 4,
+                        min: 3,
                         max: 16,
-                        message: 'The account must be between 4 and 16 characters long'
+                        message: 'The account must be between 3 and 16 characters long'
                     },
                     stringCase: {
                         message: 'The account must be in lowercase',
@@ -95,6 +108,12 @@ $(document).ready(function() {
                     regexp: {
                         regexp: /^[a-zA-Z0-9]+$/,
                         message: 'The account can only be alpha numeric'
+                    },
+                    remote: {
+                        type: 'POST',
+                        url: '/register/ajax/validate',
+                        message: 'The username is not available',
+                        delay: 500
                     }
                 }
             },
@@ -105,6 +124,12 @@ $(document).ready(function() {
                     },
                     emailAddress: {
                         message: 'The input is not a valid email address'
+                    },
+                    remote: {
+                        type: 'POST',
+                        url: '/register/ajax/validate',
+                        message: 'This email address is already registered',
+                        delay: 500
                     }
                 }
             },
@@ -130,14 +155,37 @@ $(document).ready(function() {
 
             // Get the BootstrapValidator instance
             var bv = $form.data('bootstrapValidator');
-
-            // Use Ajax to submit form data
-            $.post($form.attr('action'), $form.serialize(), function(result) {
-                console.log(result);
-            }, 'json');
+            
+            var name = $('#defaultForm').find('input[name="name"]').val();
+            var account = $('#defaultForm').find('input[name="account"]').val();
+            var email = $('#defaultForm').find('input[name="email"]').val();
+            
+            registration = { "name": name, "email": email, "account": account };
+            $.ajax({
+                type: "POST",
+                url: "/register/ajax/process",
+                data: JSON.stringify({ registration: registration }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data){registrationState(data["success"]);},
+                failure: function(errMsg) {
+                    alert(errMsg);
+                }
+            });
     });
-
 });
+
+function registrationState(result) {
+    if (result) {
+        $("#regForm").hide();
+        $("#regSuccess").show();
+    } else {
+        bootbox.alert("Registration failed, please email noc@esgob.com", function() {
+            
+        });
+    }
+
+}
 </script>
 
 {% endblock %}

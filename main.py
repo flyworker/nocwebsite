@@ -3,7 +3,7 @@
 """main.py: Esgob NOC website"""
 
 import os
-from flask import Flask, render_template, send_from_directory, flash, request, redirect, url_for, g, Response
+from flask import Flask, render_template, send_from_directory, flash, request, redirect, url_for, g, Response, jsonify
 from flask.ext.cache import Cache
 from ApiClient import ApiClient
 from CommonConfig import CommonConfig
@@ -103,9 +103,32 @@ def docs_host_anycast_instance():
 def register():
     return render_template('register.html')
 
-@app.route('/register2')
-def register2():
-    return render_template('register2.html')
+
+@app.route('/register/ajax/validate', methods=['POST'])
+def register_ajax_validate():
+    val = None
+    if "account" in request.form:
+        val = request.form["account"]
+    elif "email" in request.form:
+        val = request.form["email"]
+    else:
+        return jsonify(valid=False)
+
+    return jsonify(valid=True)
+
+
+@app.route('/register/ajax/process', methods=['POST'])
+def register_ajax_process():
+    if "registration" not in request.json:
+        return jsonify(success=False)
+    reg = request.json["registration"]
+    if "account" not in reg or "email" not in reg or "name" not in reg:
+        return jsonify(success=False)
+    account = reg["account"].strip().lower()
+    email = reg["email"].strip().lower()
+    name = reg["name"].strip()
+    return jsonify(success=True)
+
 
 @app.route('/docs/api/<resource>')
 @cache.cached(timeout=30)

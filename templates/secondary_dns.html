@@ -5,8 +5,7 @@
             <h2>Free Secondary DNS</h2>
         </div>
 	<h3>Summary</h3>
-	<div><p>We've built out an anycast DNS service spanning multiple countries and continents.</p></div>
-	<div><p>We are seeking participants to beta test our <b>free</b> secondary DNS service, we already host over a 1000 zones.</p></div>
+	<div><p>We've built out an anycast DNS service spanning multiple countries and continents, we already host thousands of zones and handle hundreds of queries per second.</p></div>
 	<h3>Features</h3>
 	<ul>
 		<li><a href="/">14 Anycast nodes</a> deployed (and growing every month!)</li>
@@ -25,6 +24,8 @@
 			<li>Multi master</li>
 		</ul>
 	</ul>
+	<button class="btn btn-large btn-primary" type="button">Register now &gt;&gt;</button>
+	<p>&nbsp;<p>
  	<h3>Configuration</h3>
 	<p>Secondary DNS zones are served via anycast from (please add this to your NS record and delegate at your registrar):<br/>
 		<ul>
@@ -66,7 +67,5 @@ anycastns		A	193.47.147.100
 			AAAA	2001:67c:1b43:100::100
 </pre>
 	<p>Then specify anycastns.example.com instead of ns1.esgob.com in the delegation.<p>
-	<h3>Join in - beta</h3>
-	<p>To participate please email <a href="mailto:noc@esgob.com">noc@esgob.com</a> and we will create you an account.</p>
 
 {% endblock %}
