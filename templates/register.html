@@ -1,46 +1,67 @@
 {% extends "layout.html" %}
 {% block title %}Register for free anycast secondary DNS{% endblock %}
 {% block body %}
-<p>&nbsp;</p>
+
 <div class="container">
+        <div class="row">
+            <!-- form: -->
+            <section>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="page-header">
+                        <h2>Please register <small>For free Anycast DNS</small></h2>
+                    </div>
 
-<!-- from http://bootsnipp.com/snippets/featured/mix-amp-match-register -->
-<div class="row">
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-        <form role="form" class="registerForm">
-            <h2>Please register <small>Free Anycast Secondary DNS.</small></h2>
-            <hr>
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
-                    </div>
+                    <form id="defaultForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Name</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" name="name" placeholder="Your name" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Account name</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="account" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Email address</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="email" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" id="captchaOperation"></label>
+                            <div class="col-lg-2">
+                                <input type="text" class="form-control" name="captcha" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <button type="submit" class="btn btn-primary" name="register" value="Register">Register</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="text" name="account_name" id="display_name" class="form-control input-lg" placeholder="Account Name" tabindex="3">
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
-            </div>
-            
-            <hr class="colorgraph">
-            <div class="row">   
-                <div class="col-xs-12 col-md-6"><input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
-            </div>
-        </form>
+            </section>
+            <!-- :form -->
+        </div>
     </div>
-</div>
-</div>
-<script type="text/javascript">
 
+<script type="text/javascript">
 $(document).ready(function() {
-    $('.registerForm').bootstrapValidator({
+    // Generate a simple captcha
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    $('#captchaOperation').html([randomNumber(1, 75), '+', randomNumber(1, 75), '='].join(' '));
+
+    $('#defaultForm').bootstrapValidator({
+//        live: 'disabled',
         message: 'This value is not valid',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -48,35 +69,75 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            account_name: {
+            name: {
+                group: '.col-lg-4',
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required and cannot be empty'
+                    }
+                }
+            },
+            account: {
                 message: 'The account name is not valid',
                 validators: {
                     notEmpty: {
-                        message: 'Account name is required and cannot be empty'
+                        message: 'The account is required and cannot be empty'
                     },
                     stringLength: {
                         min: 4,
-                        max: 30,
-                        message: 'Account name must be more than 4 and less than 30 characters long'
+                        max: 16,
+                        message: 'The account must be between 4 and 16 characters long'
+                    },
+                    stringCase: {
+                        message: 'The account must be in lowercase',
+                        'case': 'lower'
                     },
                     regexp: {
                         regexp: /^[a-zA-Z0-9]+$/,
-                        message: 'Account name can only consist of alphabetical and number'
+                        message: 'The account can only be alpha numeric'
                     }
                 }
             },
             email: {
                 validators: {
                     notEmpty: {
-                        message: 'The email is required and cannot be empty'
+                        message: 'Email is required and cannot be empty'
                     },
                     emailAddress: {
                         message: 'The input is not a valid email address'
                     }
                 }
+            },
+            captcha: {
+                validators: {
+                    callback: {
+                        message: 'Wrong answer',
+                        callback: function(value, validator) {
+                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                            return value == sum;
+                        }
+                    }
+                }
             }
         }
+    })
+    .on('success.form.bv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Get the form instance
+            var $form = $(e.target);
+
+            // Get the BootstrapValidator instance
+            var bv = $form.data('bootstrapValidator');
+
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                console.log(result);
+            }, 'json');
     });
+
 });
 </script>
+
 {% endblock %}
