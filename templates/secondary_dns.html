@@ -48,8 +48,10 @@
 zone "natmorris.co.uk" {
         type master;
         file "/etc/bind/master/db.natmorris.co.uk";
-        allow-transfer { 195.177.253.142; };
-        also-notify { 195.177.253.142; };
+        allow-transfer { 195.177.253.142;
+        2001:67c:1b40:142::142;        };
+        also-notify { 195.177.253.142;
+        2001:67c:1b40:142::142;        };
 };
 </pre>
 	<h4>Adding a zone</h4>
